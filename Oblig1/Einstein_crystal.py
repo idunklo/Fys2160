@@ -35,7 +35,11 @@ def prob_plot(q = 100, N_A = 50, N_B = 50):
     plt.plot(q_A, omega_prob)
     plt.xlabel("macrostates, q_A")
     plt.ylabel("probability")
+    plt.savefig("part1.png")
     plt.show()
+    
+    
+    
 
 
 # Omega_tot(6, 2, 2)  
