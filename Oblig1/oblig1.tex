@@ -176,7 +176,7 @@
         The number of possible microstates for each macrostate is found by using the
         following program. 
 
-        PUT PROGRAM HERE! 
+        \lstinputlisting[language=Python, title = Calculating number of possible microstates for each macrostate]{Einstein_crystal.py}    
 
         Assuming that all microstates are equally probable, running the program also
         gives the probabilities of each macrostate.
@@ -184,11 +184,23 @@
     \item
 
         Before thermal contact, the system had 12 microstates, while after thermal 
-        contact, it had 84. 
+        contact, it had 84. From this we can assume that a system has a lot more
+        microstates after thermal contact. 
 
     \item
 
-        PUT THE PLOT HERE! FIND MOST PROBABLE MACROSTATE
+        \begin{figure}[H]
+            \centering % center the image horizontally
+            \includegraphics[width=0.9\textwidth]{part1.png}
+            \caption{The probability, \(P_A\) as a function of \(q_A\) for a system with \(N_A = 50\), \(N_B = 50\) and \(q = 100\)} 
+            \end{figure}  
+
+        From the calculations in the program, we find that:
+        The most probable macrostate for a system with \(q = 100\), \(N_A = 50\) and \(N_B = 
+        50\) is \(50\). 
+        The probability for this state is \(0.0562078\)
+
+        
 
     \item
 
@@ -295,7 +307,29 @@
 
     \item
 
-        PUT PROGRAM AND PLOT HERE! 
+        Assuming that all microstates are equally likely, we can generate M = 1000
+        microstates for a N = 50 system randomly and plot the energies of the system.
+        We can also plot a histogram for the energies for better visualization. 
+        The program I used for doing this is the one below. The last part of the 
+        program is for task q). 
+
+        
+        \lstinputlisting[language=Python, title = Finding and plotting energies 
+        for a paramagnetic system with binary spins]{spin_system.py}  
+
+        And the output relevant for this task is: 
+
+         \begin{figure}[H]
+            \centering % center the image horizontally
+            \includegraphics[width=0.7\textwidth]{energy.png}
+            \caption{Energy of the system plottet against the trial number} 
+            \end{figure} 
+
+            \begin{figure}[H]
+            \centering % center the image horizontally
+            \includegraphics[width=0.7\textwidth]{hist.png}
+            \caption{Histogram of the energies of the system} 
+            \end{figure}  
 
     \item
 
@@ -347,8 +381,16 @@
         CALCULATE STUPID STIRLING HERE!
 
     \item 
+        
+        By using the same program as in task m), we can compare the analytical
+        result with the histogram generated. 
 
-        PUT PLOT WITH HISTOGRAM AND ANALYTICAL SOLUTION HERE!
+         \begin{figure}[H]
+            \centering % center the image horizontally
+            \includegraphics[width=0.7\textwidth]{analytical_approx.png}
+            \caption{Histogram of the energies of the system compared with the analytical solution.} 
+            \end{figure} 
+
 
     \item 
 

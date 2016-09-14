@@ -32,6 +32,13 @@ def prob_plot(q = 100, N_A = 50, N_B = 50):
     q_A, omega_tot, omega_sum = Omega_tot(q, N_A, N_B)
     omega_prob = omega_tot/omega_sum 
 
+    max_prob_index= omega_prob.argmax()
+
+    max_prob = omega_prob[max_prob_index]
+    most_prob_qa = q_A[max_prob_index] 
+
+    print "The most probable macrostate for a system with q = %g, N_A = %g and N_B = %g is %g. The probability for this state is %g" %(q, N_A, N_B, most_prob_qa, max_prob)
+    
     plt.plot(q_A, omega_prob)
     plt.xlabel("macrostates, q_A")
     plt.ylabel("probability")
