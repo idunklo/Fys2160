@@ -1,0 +1,388 @@
+  \documentclass[a4paper,norsk,12pt,oneside]{article}
+% To use norwegian
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[norsk]{babel}
+% math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\usepackage{graphicx} % images
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{fancyvrb} % code
+\usepackage{algorithm2e} % algorithm
+% For listing
+\usepackage{listings} % code with color
+\usepackage{courier}
+\usepackage{caption}
+\usepackage{color}
+
+\title{Fys2160, Oblig 1}
+\author{Idun Kløvstad}
+\date{\today}  
+
+% Command for L'Hopital's rule (requires extarrows-package)
+\newcommand{\Heq}[1]{\xlongequal[\mathrm{L'H}]{\left[#1\right]}}
+
+% Double underline
+\newcommand{\dul}[1]{\underline{\underline{#1}}}
+
+% Custom operators
+\DeclareMathOperator{\nul}{Nul\,}
+\DeclareMathOperator{\Proj}{Proj\,}
+\DeclareMathOperator{\Sp}{Sp\,}
+\DeclareMathOperator{\res}{Res\,}
+\DeclareMathOperator{\Log}{Log\,}
+
+% Allow displayed page breaks
+\allowdisplaybreaks
+
+% Settings for listings
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{%
+  %language=python,                     % the language of the code
+  basicstyle=\footnotesize\ttfamily,   % the size of the fonts that are used for the code
+  numbers=left,                        % where to put the line-numbers
+  numberstyle=\tiny,                   % the style that is used for the line-numbers
+  stepnumber=2,                        % the step between two line-numbers. If it's 1, each line will be numbered
+  numbersep=5pt,                       % how far the line-numbers are from the code
+  extendedchars=true,
+  %backgroundcolor=\color{white},       % choose the background color. You must add \usepackage{color}
+  %showspaces=false,                    % show spaces adding particular underscores
+  showstringspaces=false,              % underline spaces within strings
+  %showtabs=false,                      % show tabs within strings adding particular underscores
+  %frame=single,                        % adds a frame around the code
+  frame=b,                             % adds a line at the bottom
+  %rulecolor=\color{black},             % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                           % sets default tabsize to 2 spaces
+  %captionpos=b,                        % sets the caption-position to bottom
+  breaklines=true,                     % sets automatic line breaking
+  breakatwhitespace=false,             % sets if automatic breaks should only happen at whitespace
+  %title=\lstname,                      % show the filename of files included with \lstinputlisting; also try caption instead of title
+  keywordstyle=\color{blue},           % keyword style
+  commentstyle=\color{dkgreen}\textit, % comment style
+  stringstyle=\color{mauve},           % string literal style
+  %escapeinside={\%*}{*)},              % if you want to add LaTeX within your code
+  %morekeywords={*,...},                % if you want to add more keywords to the set
+  xleftmargin=-20pt,
+  xrightmargin=-20pt,
+  framexleftmargin=19pt,
+  framexbottommargin=4pt,
+  framexrightmargin=21pt,
+} 
+
+% caption for listing
+\newlength{\mycapwidth}\setlength{\mycapwidth}{\textwidth}
+\addtolength{\mycapwidth}{75pt}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0, 0, 0, 0.8}
+    {\parbox{\mycapwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, 
+    singlelinecheck=false, margin=-40pt, font={bf,footnotesize}}
+
+
+\begin{document}
+\maketitle
+\newpage 
+
+\section{Part 1: The Einstein crystal}
+\begin{enumerate}[a)]
+    \item 
+
+        We are looking at a system with \(N = 3\) oscillators and \(q = 3\). 
+        For this system the possible microstates will be 
+
+        \begin{tabular}{c | l | c | r }
+            \label{pos_mikro}
+            \(\#\) & \(n_1\) & \(n_2\) &\(n_3\) \\
+            1 &1 & 1 & 1 \\
+            2 & 1 & 2 & 0 \\
+            3 & 1 & 0 & 2 \\
+            4 & 2 & 0 & 1 \\
+            5 & 2 & 1 & 0 \\
+            6 & 0 & 1 & 2 \\
+            7 & 0 & 2 & 1 \\
+            8 & 0 & 0 & 3 \\
+            9 & 0 & 3 & 0 \\
+            10 & 3 & 0 & 0 \\
+            \end{tabular}
+
+    \item
+
+        By using the general formula for the number of microstates, equation \ref{eq:1}, we 
+        see that the number of microstates shown in table ~\ref{pos_mikro} are consistent 
+        with the  answer from the equation. 
+
+        \begin{align}
+            \label{eq:1}
+            \Omega(N,q) &= \binom{q + N -1}{q} = \frac{(q + N - 1)!}{q!(N - 1)!}\\
+            \frac{5!}{3!2!} &= 10
+        \end{align}
+
+    \item
+
+        For the following task we will look at two isolated Einstein crystals. 
+
+        If subsystem A has \(N_A = 2\) and \(q_A = 5\) and subsystem B has \(N_B = 2\) and 
+        \(q_B = 1\), the possible microstates is shown in the table below. 
+
+        \begin{tabular}{c | l | c | r | c }
+            \label{pos_mikro}
+            \(\#\) & \(n_{A1}\) & \(n_{A2}\) &\(n_{B1}\) & \(n_{B2}\) \\
+            1 & 0 & 5 & 0 & 1 \\
+            2 & 1 & 4 & 0 & 1 \\
+            3 & 2 & 3 & 0 & 1 \\
+            4 & 3 & 2 & 0 & 1 \\
+            5 & 4 & 1 & 0 & 1 \\
+            6 & 5 & 0 & 0 & 1 \\
+            7 & 0 & 5 & 1 & 0 \\
+            8 & 1 & 4 & 1 & 0 \\
+            9 & 2 & 3 & 1 & 0 \\
+            10 & 3 & 2 & 1 & 0 \\
+            11 & 4 & 1 & 1 & 0 \\
+            12 & 5 & 0 & 1 & 0 \\
+            \end{tabular}
+
+    \item
+
+        The two systems, A and B, are put in thermal contact. The total energy
+        \(q = q_A + q_B = 6\) is constant, but can be distributed between the two
+        systems.
+
+        For \(N_A = 2\),  \(N_B = 2\) and \(q = 6\) there are seven different 
+        macrostates of the system. The different macrostates are given by the
+        possible values for \(q_A\) and \(q_B\) and is listed in the table below.
+
+        \begin{tabular}{c | l | r}
+            \label{pos_mikro}
+            \(\#\) & \(n_1\) & \(n_2\) \\
+            1 & 0 & 6 \\
+            2 & 1 & 5 \\
+            3 & 2 & 4 \\
+            4 & 3 & 3 \\
+            5 & 4 & 2 \\
+            6 & 5 & 1 \\
+            7 & 6 & 0 \\
+            \end{tabular}
+
+    \item
+
+        For each possible macrostate \(q_a\) there are a number of compatible microstates. 
+        The number of possible microstates for each macrostate is found by using the
+        following program. 
+
+        PUT PROGRAM HERE! 
+
+        Assuming that all microstates are equally probable, running the program also
+        gives the probabilities of each macrostate.
+
+    \item
+
+        Before thermal contact, the system had 12 microstates, while after thermal 
+        contact, it had 84. 
+
+    \item
+
+        PUT THE PLOT HERE! FIND MOST PROBABLE MACROSTATE
+
+    \item
+
+        Multiplicity of the Einstein model can be given by
+
+        \begin{equation}
+            \label{eq:2}
+            \Omega(N,q) = \binom{q + N -1}{q} = \frac{(q + N - 1)!}{q!(N - 1)!}\\ 
+        \end{equation}
+
+        By using Stirlings approximation and the assumption that \(\frac{N}{q}<<1\)
+        and \(N>>1\), the multiplicity can be simplified. 
+
+        First of all, as we made the assumption that \(N>>1\), we can also assume that
+        \(N -1 \approx N\). Then we are left with the following expression.
+
+         \begin{equation}
+            \label{eq:2}
+            \Omega(N,q) \approx \frac{(q + N)!}{q!N!}\\ 
+        \end{equation}   
+
+        From this the expression can be written using \(ln\). 
+
+        \begin{align*}
+             ln\Omega(N,q) &\approx ln\frac{(q + N)!}{q!N!} = ln(q-N)! - ln(q!N!)\\
+             & = ln(q + N)! - ln q! - ln N!
+        \end{align*}
+
+         With this expression, we can now use Stirlings approximation given by 
+        \(ln x! = xlnx - x\). Which gives
+
+        \begin{align*}
+            ln\Omega &\approx (q+N)ln(q+N) - (q+N) - (q lnq - q) - (N lnN -N)\\
+            &= (q + N)lnq(1 + \frac{N}{q}) - qlnq - NlnN \\ \\
+            \frac{N}{q} << 1  &\rightarrow  lnq(1 + \frac{N}{q}) = lnq + \frac{N}{q} \\ \\
+            ln\Omega &\approx N(ln \frac{q}{N} + 1)
+        \end{align*}
+
+    \item
+
+        Since the multiplicity tends to be very large numbers, it is useful to work with
+        the natural logarithm of the multiplicity instead of the multiplicity itself. 
+        By multiplying the natural logarithm of the multiplicity with Boltzmann's constant,
+        we get entropy, \(S = kln\Omega\). 
+
+        From the previous task we have that the natural logarithm for an Einstein crystal 
+        can be given by \(ln\Omega \approx N(ln \frac{q}{N} + 1) \). An expression for the
+        entropy of an Einstein crystal is then
+
+        \begin{equation*}
+           S =  kN(ln \frac{q}{N} + 1)
+        \end{equation*}
+
+    \item
+
+        The temperature of a system is given by \(T = \left ( \frac{\delta S}{\delta 
+        U}\right ) ^{-
+        1} \), where \(U = q\epsilon\). To find the temperature for an Einstein crystal, we 
+        can use that
+        \begin{equation*}
+            \frac{\delta S}{\delta U} = \frac{\delta S}{\delta q} \frac{\delta q}{\delta U}
+        \end{equation*}
+
+        By calculating this we get
+        \begin{align*}
+            \frac{1}{T} &= \frac{1}{\epsilon} \frac{\delta}{\delta q}[kN(ln \frac{q}{N} + 
+            1)]\\
+            & = kN\frac{1}{q\epsilon} = \frac{kN}{U}\\ \\
+            &\downarrow \\ \\
+            T &= \left ( \frac{kN}{U} \right )^{-1}
+        \end{align*}
+
+        To say something about this, instead of looking at the temperature, we can look
+        at U. Because we now have \(U = kNT\). The equipartition theorem says that the 
+        the total energy should be \(\frac{1}{2}kT\) times the number of degrees of freedom. 
+        As the Einstain crystal has two degrees of freedom for every oscillator, we see
+        that our expression for temperature, and therefore for \(U\) fits this theorem. 
+
+\section{Part 2: The spin system}
+
+
+        We will now look at a paramagnetic system with binary spins. Each particle can
+        be in two possible states, \(S = +1\) or \(S = -1\). The energy of a single particle
+        is \(E = -S\mu B\). We will look at a system with N spins that do not interact. 
+
+    \item
+
+        The number of microstates for at N-spin system is easily calculated. As each 
+        particle can have two different values and there are N particles, there will be 
+        \(N^2\) microstates. 
+
+    \item
+
+        From now \(S_+\) will be used for the number of spins with value \(+1\) and \(S_-\) 
+        as the number of spins with value \(-1\). We also introduce the net spin, \(2s = 
+        S_+ - S_-\).
+
+        An expression for the total energy, \(E\), as the function of the net spin
+        is shown below. 
+
+        \begin{equation*}
+            E = \sum\limits_i E_i = \sum\limits_i -S_i \mu B = -2s \mu B
+        \end{equation*}
+
+    \item
+
+        PUT PROGRAM AND PLOT HERE! 
+
+    \item
+
+        The system has one macrostate for each possible \(S_+\) from \(0 \rightarrow N\),
+        and the multiplicity will then be given by
+        \begin{equation*}
+            \Omega(N, S_+) = \binom{N}{S_+} = \frac{N!}{S_+!(N-S_+)}
+        \end{equation*}
+
+        When we consider that \(S_- = N - S_+\) we get the following expression
+
+        \begin{equation*}
+            \Omega(N, S_+) = \frac{N!}{S_+!S_-!}
+        \end{equation*}
+
+    \item
+
+        The multiplicity can also be written as a function of the net spin, \(s\)
+        \begin{equation*}
+            \Omega(N, s) = \frac{N!}{\left (\frac{N}{2} + s \right )! \left (\frac{N}{2} - s 
+        \right )!} 
+        \end{equation*}
+
+        We can show this by showing that this equation, and the equation from the previous
+        task is the same. 
+        I will start with looking at only \(\left (\frac{N}{2} + s \right )!\). 
+        We know that \(s = \frac{S_+ - S_-}{2}\) and can therefore put this in,
+        instead of s which gives
+
+        \begin{equation*}
+            \frac{N}{2} + \left (\frac{S_+ - S_-}{2} \right ) 
+        \end{equation*}
+
+        By recognizing that \(N - S_-\) is the same as \(S_+\) we get
+
+        \begin{equation*}
+            \frac{N}{2} + \left (\frac{S_+ - S_-}{2} \right ) = \frac{2S_+}{2} = S_+
+        \end{equation*}
+
+        We can then do the same calculation for \( \left (\frac{N}{2} - s 
+        \right )! \)  and show that
+
+        \begin{equation*}
+            \left (\frac{N}{2} - s \right )! = \frac{2S_-}{2} = S_-
+        \end{equation*} 
+
+    \item
+
+        CALCULATE STUPID STIRLING HERE!
+
+    \item 
+
+        PUT PLOT WITH HISTOGRAM AND ANALYTICAL SOLUTION HERE!
+
+    \item 
+
+        The entropy is given by
+
+        \begin{equation*}
+            S(N,S_+) = kln\Omega(N, S_+) = k ln\left ( \frac{N!}{S_+! S_-!} \right )
+        \end{equation*}
+
+    \item
+
+        The temperature is given by \(T = \left (\frac{\delta S}{\delta U} \right)^{-1} \). 
+        From 
+        task p) we remember that \(ln\Omega(N,s) = \Omega(N,0) - \frac{
+        2s^2}{N} \). We also have that \(U = -2s \mu B\). Then we have
+
+        \begin{align*}
+            \frac{\delta S}{\delta U} &= \frac{\delta S}{\delta s} \frac{\delta s}{\delta 
+            U}\\ \\
+            &= - \frac{1}{2 \mu B} \frac{\delta}{\delta s} \left [k \left ( ln\Omega(N,0)
+            - \frac{2s^2}{N} \right ) \right ] \\\\
+            &= -\frac{1}{2 \mu B} \frac{4ks}{N} \\\\
+            T &= - \frac{\mu BN}{2ks}
+        \end{align*}
+
+        If we want temperature expressed by \(S_+\) instead of \(s\) we know that 
+        \(s = S_+ - \frac{N}{2}\). Which gives
+
+        \begin{equation*}
+            T = \frac{\mu BN}{2k\left (S_+ - \frac{N}{2}\right )}
+        \end{equation*}
+
+    \end{enumerate}
+
+
+\end{document}                                             
+                          
